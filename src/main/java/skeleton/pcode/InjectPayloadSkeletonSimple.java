@@ -7,8 +7,7 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.pcode.PcodeOp;
 
 /**
- * Test to demonstrate a Ghidra bug: the decompiler outputs bogus loops if two
- * callother instructions are adjacent.
+ * Simple injection payload to demonstrate callother handling
  */
 public class InjectPayloadSkeletonSimple extends InjectPayloadCallother {
 

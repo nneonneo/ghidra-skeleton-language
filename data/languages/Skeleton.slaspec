@@ -22,8 +22,6 @@ define pcodeop emptyCallOther;
   return [lr];
 }
 
-
-# This instruction outputs a bogus loop
 jmpdest: reloc is simm8 [ reloc=inst_next + simm8; ] { export *:1 reloc; }
 :test2 imm8 jmpdest is opcode=0x42; imm8; jmpdest {
   if(r0 != imm8) goto inst_next;
@@ -43,6 +41,8 @@ jmpdest: reloc is simm8 [ reloc=inst_next + simm8; ] { export *:1 reloc; }
 :nop is opcode=0x90 {
 }
 
+# Jumping to this jump causes incorrect decompilation in the decompiler
+# Blocks are removed and forward jumps may be incorrectly converted to loops
 :jmp jmpdest is opcode=0xeb; jmpdest {
   simpleCallOther();
   goto jmpdest;
