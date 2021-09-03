@@ -1,0 +1,49 @@
+# Basic machine definitions
+define endian=little;
+define alignment=1;
+
+define space ram type=ram_space size=4 default;
+define space register type=register_space size=4;
+
+define register offset=0 size=4 [ _ pc sp fp lr r0 r1 r2 r3 ];
+
+# Instructions
+define token byte (8)
+  opcode = (0, 7)
+  imm8 = (0, 7)
+  simm8 = (0, 7) signed
+;
+
+define pcodeop simpleCallOther;
+define pcodeop emptyCallOther;
+
+# This instruction works fine
+:ret is opcode=0xc3 {
+  return [lr];
+}
+
+
+# This instruction outputs a bogus loop
+jmpdest: reloc is simm8 [ reloc=inst_next + simm8; ] { export *:1 reloc; }
+:test2 imm8 jmpdest is opcode=0x42; imm8; jmpdest {
+  if(r0 != imm8) goto inst_next;
+  goto jmpdest;
+}
+
+# This instruction crashes the decompiler
+:test3 is opcode=0x43 {
+  emptyCallOther();
+  return [lr];
+}
+
+:mov0 is opcode=0x51; imm8 {
+  r0 = imm8;
+}
+
+:nop is opcode=0x90 {
+}
+
+:jmp jmpdest is opcode=0xeb; jmpdest {
+  simpleCallOther();
+  goto jmpdest;
+}

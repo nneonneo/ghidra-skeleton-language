@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language_definitions>
+   <language processor="Skeleton"
+             endian="little"
+             size="32"
+             variant="default"
+             version="1.0"
+             slafile="Skeleton.sla"
+             processorspec="Skeleton.pspec"
+             id="Skeleton:LE:32:default">
+    <description>Skeleton Language Module</description>
+    <compiler name="default" spec="Skeleton.cspec" id="default"/>
+  </language> 
+</language_definitions>

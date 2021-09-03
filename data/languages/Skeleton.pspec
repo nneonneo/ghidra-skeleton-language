@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<processor_spec>
+  <properties>
+    <property key="pcodeInjectLibraryClass" value="skeleton.pcode.PcodeInjectLibrarySkeleton"/>
+  </properties>
+  <inferptrbounds>
+    <range space="ram" first="0x10000000" last="0xffffffff"/>
+  </inferptrbounds>
+  <programcounter register="sp"/>
+</processor_spec>
